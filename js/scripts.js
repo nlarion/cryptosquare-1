@@ -1,5 +1,5 @@
 function cryptosquare(message) {
-  var noPunc = message.replace(/[.,'\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+  var noPunc = message.replace(/[.,'?\/#!$%\^&\*;:{}=\-_`~()]/g,"");
   var noSpace = noPunc.replace(/[" "]/g,"");
   var noCaps = noSpace.toLowerCase();
   var len = noCaps.length;
@@ -20,6 +20,9 @@ function cryptosquare(message) {
   var codedArray = [];
   for ( var x = 0; x < col; x++) {
     for ( var y = 0; y < col; y++) {
+      if (brokenStr[y][x] === undefined) {
+        continue;
+      }
       emptyString += brokenStr[y][x];
       if (emptyString.length === 5) {
          codedArray.push(emptyString);
@@ -27,7 +30,23 @@ function cryptosquare(message) {
       }
     }
   }
-  // debugger;
+  codedArray.push(emptyString);
 
   return codedArray;
 }
+
+$(function() {
+  $('form#message').submit(function(event) {
+    var message = $('input#code').val();
+    var cryptic = cryptosquare(message);
+
+   for (var k = 0; k < cryptic.length; k++) {
+     $('#secretCode').append(cryptic[k] + '<br>');
+   }
+
+    $('#result').show();
+
+    event.preventDefault();
+  });
+
+});
