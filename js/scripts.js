@@ -15,5 +15,19 @@ function cryptosquare(message) {
   for (var j = 0; j < col; j++) {
     brokenStr.push(noCaps.slice(col*j, col*(j+1)));
   }
-  return brokenStr;
+
+  var emptyString = "";
+  var codedArray = [];
+  for ( var x = 0; x < col; x++) {
+    for ( var y = 0; y < col; y++) {
+      emptyString += brokenStr[y][x];
+      if (emptyString.length === 5) {
+         codedArray.push(emptyString);
+         emptyString = "";
+      }
+    }
+  }
+  // debugger;
+
+  return codedArray;
 }
