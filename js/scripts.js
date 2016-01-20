@@ -40,6 +40,8 @@ $(function() {
     var message = $('input#code').val();
     var cryptic = cryptosquare(message);
 
+    $('#secretCode').empty()
+
    for (var k = 0; k < cryptic.length; k++) {
      $('#secretCode').append(cryptic[k] + '<br>');
    }
